@@ -1,21 +1,22 @@
 <?php
 namespace Corley\MaintenanceBundle\Tests\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use \PHPUnit\Framework\TestCase;
 
 use Corley\MaintenanceBundle\DependencyInjection\CorleyMaintenanceExtension;
 
-class CorleyMaintenanceExtensionTest extends \PHPUnit_Framework_TestCase
+class CorleyMaintenanceExtensionTest extends TestCase
 {
+    /** @var ContainerBuilder */
     private $container;
-
+    private $kernel;
     private $symlink;
     private $copy;
 
-    public function setUp()
+    public function setUp(): void
     {
-        $this->kernel = $this->getMock('Symfony\\Component\\HttpKernel\\KernelInterface');
+        $this->kernel = $this->createMock('Symfony\\Component\\HttpKernel\\KernelInterface');
 
         $this->symlink = $this->getMockBuilder('Corley\MaintenanceBundle\Maintenance\Strategy\SymlinkStrategy')
             ->disableOriginalConstructor()

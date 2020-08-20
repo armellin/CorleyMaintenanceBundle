@@ -2,9 +2,10 @@
 namespace Corley\MaintenanceBundle\Tests\DependencyInjection;
 
 use Corley\MaintenanceBundle\DependencyInjection\Configuration;
+use \PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Processor;
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+class ConfigurationTest extends TestCase
 {
     /**
      * @dataProvider getModes
@@ -32,7 +33,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                     'symlink' => false,
                     'soft_lock' => 'soft.lock',
                     'hard_lock' => 'hard.lock',
-                    'web' => '%kernel.root_dir%/../web',
+                    'web' => '%kernel.project_dir%/public',
                     'whitelist' => array(
                         'paths' => array(),
                         'ips' => array()
@@ -46,7 +47,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                     'symlink' => true,
                     'soft_lock' => 'soft.lock',
                     'hard_lock' => 'hard.lock',
-                    'web' => '%kernel.root_dir%/../web',
+                    'web' => '%kernel.project_dir%/public',
                     'whitelist' => array(
                         'paths' => array('/_'),
                         'ips' => array()

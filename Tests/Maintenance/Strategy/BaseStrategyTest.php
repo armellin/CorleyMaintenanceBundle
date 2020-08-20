@@ -2,12 +2,13 @@
 namespace Corley\MaintenanceBundle\Tests\Maintenance\Strategy;
 
 use org\bovigo\vfs\vfsStream;
+use \PHPUnit\Framework\TestCase;
 
-class BaseStrategyTest extends \PHPUnit_Framework_TestCase
+class BaseStrategyTest extends TestCase
 {
     private $root;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->root = vfsStream::setup('web');
     }

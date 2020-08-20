@@ -1,15 +1,16 @@
 <?php
 namespace Corley\MaintenanceBundle\Tests\Maintenance;
 
+use \PHPUnit\Framework\TestCase;
 use Corley\MaintenanceBundle\Maintenance\Runner;
 
-class RunnerTest extends \PHPUnit_Framework_TestCase
+class RunnerTest extends TestCase
 {
     private $strategy;
 
-    public function setUp()
+    public function setUp(): void
     {
-        $this->strategy = $this->getMock("Corley\\MaintenanceBundle\\Maintenance\\Strategy\\BaseStrategy");
+        $this->strategy = $this->createMock("Corley\\MaintenanceBundle\\Maintenance\\Strategy\\BaseStrategy");
     }
 
     public function testBasePutFile()

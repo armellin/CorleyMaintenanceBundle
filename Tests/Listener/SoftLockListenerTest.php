@@ -2,21 +2,28 @@
 namespace Corley\MaintenanceBundle\Test\Listener;
 
 use Symfony\Component\HttpFoundation\Request;
+use \PHPUnit\Framework\TestCase;
 use Corley\MaintenanceBundle\Listener\SoftLockListener;
 
-class SoftLockListenerTest extends \PHPUnit_Framework_TestCase
+class SoftLockListenerTest extends TestCase
 {
     private $event;
     private $requestStack;
 
-    public function setUp()
+    public function setUp(): void
     {
-        $this->event = $this->getMockBuilder('Symfony\Component\HttpKernel\Event\GetResponseEvent')
+        // This check is necessary until support for SF <4.3 is no-longer required since
+        // GetResponseEvent is deprecated in 4.4 and removed in 5.0
+        $event = class_exists('Symfony\Component\HttpKernel\Event\RequestEvent')
+            ? 'Symfony\Component\HttpKernel\Event\RequestEvent'
+            : 'Symfony\Component\HttpKernel\Event\GetResponseEvent';
+
+        $this->event = $this->getMockBuilder($event)
             ->disableOriginalConstructor()
             ->setMethods(null)
             ->getMock();
 
-        $this->requestStack = $this->getMock(
+        $this->requestStack = $this->createMock(
             'Symfony\\Component\\HttpFoundation\\RequestStack',
             array('getCurrentRequest')
         );

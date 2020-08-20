@@ -3,18 +3,16 @@ namespace Corley\MaintenanceBundle\Tests\Command;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-
+use \PHPUnit\Framework\TestCase;
 use Corley\MaintenanceBundle\Command\MaintenanceCommand;
 
-class MaintenanceCommandTest extends \PHPUnit_Framework_TestCase
+class MaintenanceCommandTest extends TestCase
 {
-    private $kernel;
     private $runner;
 
     private function prepareCommand()
     {
-        //$this->kernel = $this->getMock('Symfony\\Component\\HttpKernel\\KernelInterface');
-        $this->runner = $this->getMock('Corley\\MaintenanceBundle\\Maintenance\\Runner', array(), array(), '', false, false);
+        $this->runner = $this->createMock('Corley\\MaintenanceBundle\\Maintenance\\Runner', array(), array(), '', false, false);
 
         $application = new Application();
         $application->add(new MaintenanceCommand($this->runner));
@@ -26,10 +24,11 @@ class MaintenanceCommandTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     *
      */
     public function testMaintenanceWantsOnOff()
     {
+        $this->expectException('InvalidArgumentException');
         $commandTester = $this->prepareCommand();
         $commandTester->execute(
             array(
